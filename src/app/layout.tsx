@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { generalSans, pinar } from "@/lib/fonts";
 import { LanguageProvider } from "@/context/language-context";
+import { Sidebar } from "@/components/layout/sidebar";
+import { MainContent } from "@/components/layout/main-content";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,10 +16,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-   <html lang="en" dir="ltr" suppressHydrationWarning>
-  <body className={`${generalSans.variable} ${pinar.variable} font-en antialiased`}>
-    <LanguageProvider>{children}</LanguageProvider>
-  </body>
-</html>
+    <html lang="en" dir="ltr" suppressHydrationWarning>
+      <body className={`${generalSans.variable} ${pinar.variable} font-en antialiased`}>
+        <LanguageProvider>
+          <Sidebar />
+          <MainContent>{children}</MainContent>
+        </LanguageProvider>
+      </body>
+    </html>
   );
 }
