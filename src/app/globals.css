@@ -1,13 +1,54 @@
 @import "tailwindcss";
 
+@theme {
+  /* رنگ‌های اصلی پالت */
+  --color-bg: #213448;
+  --color-bg-secondary: #2c4560;
+  --color-border: #547792;
+  --color-text-muted: #94b4c1;
+  --color-text: #ecefca;
+  --color-accent: #ecefca;
+
+  /* شعاع گوشه‌ها */
+  --radius-card: 0.75rem;
+  --radius-button: 0.5rem;
+
+  /* Typography Scale */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+
+  /* Line Heights */
+  --leading-tight: 1.25;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.8;
+
+  /* Spacing (برای section ها و container ها) */
+  --spacing-section: 6rem;
+  --spacing-section-sm: 3rem;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.25);
+  --shadow-card-hover: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
 .font-en {
   font-family: var(--font-en), sans-serif;
+  line-height: var(--leading-normal);
 }
 
 .font-fa {
   font-family: var(--font-fa), sans-serif;
-}
-
-html {
-  font-family: var(--font-en), sans-serif;
+  line-height: var(--leading-relaxed);
 }
