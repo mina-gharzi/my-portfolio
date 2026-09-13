@@ -1,6 +1,7 @@
 import { Hero } from "@/components/sections/hero";
 import { About } from "@/components/sections/about";
 import { Container } from "@/components/layout/container";
+import { Skills } from "@/components/sections/skills";
 
 export default function Home() {
   return (
@@ -11,7 +12,9 @@ export default function Home() {
       {/* Placeholder — بعداً با کامپوننت واقعی جایگزین می‌شه */}
       <section id="skills" className="min-h-screen flex items-center">
         <Container>
-          <h2 className="text-4xl font-bold text-text">Skills</h2>
+          <h2 className="text-4xl font-bold text-text">
+            <Skills />
+          </h2>
         </Container>
       </section>
 
