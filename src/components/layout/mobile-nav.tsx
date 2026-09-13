@@ -37,7 +37,7 @@ export function MobileNav() {
 
       {/* پنل کشویی */}
       <div
-        className={`lg:hidden fixed top-0 start-0 z-50 h-dvh w-[80%] max-w-xs bg-bg-secondary border-e border-border p-8 flex flex-col justify-between overflow-y-auto transition-transform duration-300 ${
+        className={`lg:hidden fixed top-0 inset-s-0 z-50 h-dvh w-[80%] max-w-xs bg-bg-secondary border-e border-border p-8 flex flex-col justify-between overflow-y-auto transition-transform duration-300 ${
           isOpen
             ? "translate-x-0"
             : "ltr:-translate-x-full rtl:translate-x-full"
