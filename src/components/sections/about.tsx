@@ -18,7 +18,9 @@ const content = {
       "Creating scalable and maintainable applications with Next.js",
       "Designing responsive, accessible, and user-focused experiences",
     ],
+    education: "B.Sc. in Computer Engineering — Islamic Azad University",
   },
+
   fa: {
     eyebrow: "۰۱",
     title: "درباره من",
@@ -33,6 +35,7 @@ const content = {
       "ساخت پروژه‌های مقیاس‌پذیر و قابل‌نگهداری با Next.js",
       "طراحی رابط‌های واکنش‌گرا، دسترس‌پذیر و کاربرمحور",
     ],
+    education: "کارشناسی مهندسی کامپیوتر — دانشگاه آزاد اسلامی",
   },
 };
 
@@ -77,6 +80,8 @@ export function About() {
                 ))}
               </ul>
             </div>
+
+            <p className="mt-8 text-sm text-text-muted/70">🎓 {t.education}</p>
           </div>
         </div>
       </Container>
