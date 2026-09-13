@@ -4,6 +4,7 @@ import { LanguageProvider } from "@/context/language-context";
 import { Sidebar } from "@/components/layout/sidebar";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { MainContent } from "@/components/layout/main-content";
+import { Footer } from "@/components/layout/footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,11 +19,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
-      <body className={`${generalSans.variable} ${pinar.variable} font-en antialiased`}>
+      <body
+        className={`${generalSans.variable} ${pinar.variable} font-en antialiased`}
+      >
         <LanguageProvider>
           <Sidebar />
           <MobileNav />
-          <MainContent>{children}</MainContent>
+          <MainContent>
+            {children}
+            <Footer />
+          </MainContent>
         </LanguageProvider>
       </body>
     </html>
