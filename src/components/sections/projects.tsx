@@ -27,7 +27,10 @@ export function Projects() {
 
         <div className="grid md:grid-cols-2 gap-6">
           {projects.map((project) => (
-            <Card key={project.id} className="p-0 overflow-hidden flex flex-col">
+            <Card
+              key={project.id}
+              className="p-0 overflow-hidden flex flex-col"
+            >
               <div className="aspect-video bg-bg border-b border-border overflow-hidden">
                 {project.image ? (
                   <img
@@ -43,7 +46,11 @@ export function Projects() {
               </div>
 
               <div className="p-6 flex flex-col flex-1">
-                <h3 className="text-xl font-bold text-text mb-2">{project.name}</h3>
+                <a href={`/projects/${project.id}`} className="block">
+                  <h3 className="text-xl font-bold text-text mb-2 hover:text-accent transition-colors">
+                    {project.name}
+                  </h3>
+                </a>
                 <p className="text-sm text-text-muted leading-relaxed mb-4">
                   {project.description[language]}
                 </p>
