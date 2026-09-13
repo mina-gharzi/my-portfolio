@@ -1,20 +1,31 @@
-import { Container } from "@/components/layout/container";
 import { Hero } from "@/components/sections/hero";
-
-const sections = ["home", "about", "skills", "projects", "contact"];
+import { About } from "@/components/sections/about";
+import { Container } from "@/components/layout/container";
 
 export default function Home() {
   return (
     <>
-      {sections.map((id) => (
-        <section key={id} id={id} className="min-h-screen flex items-center">
-          <Container>
-            <h2 className="text-4xl font-bold text-text capitalize">
-              <Hero />
-            </h2>
-          </Container>
-        </section>
-      ))}
+      <Hero />
+      <About />
+
+      {/* Placeholder — بعداً با کامپوننت واقعی جایگزین می‌شه */}
+      <section id="skills" className="min-h-screen flex items-center">
+        <Container>
+          <h2 className="text-4xl font-bold text-text">Skills</h2>
+        </Container>
+      </section>
+
+      <section id="projects" className="min-h-screen flex items-center">
+        <Container>
+          <h2 className="text-4xl font-bold text-text">Projects</h2>
+        </Container>
+      </section>
+
+      <section id="contact" className="min-h-screen flex items-center">
+        <Container>
+          <h2 className="text-4xl font-bold text-text">Contact</h2>
+        </Container>
+      </section>
     </>
   );
 }
