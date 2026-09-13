@@ -5,19 +5,14 @@ import { SiGithub } from "@icons-pack/react-simple-icons";
 import { useLanguage } from "@/context/language-context";
 import { navItems, siteContent } from "@/config/nav";
 
-
 const content = {
   en: {
     name: "Mina Gharzi",
     title: "Frontend Developer",
-    description:
-      "I build accessible, responsive web applications with React and TypeScript.",
   },
   fa: {
     name: "مینا قارزی",
     title: "توسعه‌دهنده‌ی فرانت‌اند",
-    description:
-      "وب‌اپلیکیشن‌های واکنش‌گرا و در دسترس با React و TypeScript می‌سازم.",
   },
 };
 
@@ -30,9 +25,6 @@ export function Sidebar() {
       <div>
         <h1 className="text-3xl font-bold text-text mb-2">{t.name}</h1>
         <h2 className="text-lg text-text-muted mb-4">{t.title}</h2>
-        <p className="text-sm text-text-muted leading-relaxed mb-8">
-          {t.description}
-        </p>
 
         <nav>
           <ul className="flex flex-col gap-4">
