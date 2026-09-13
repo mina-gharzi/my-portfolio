@@ -14,7 +14,7 @@ const content = {
 
     name: "Mina Gharzi",
     subtitle: "Building clean, responsive, and user-focused web experiences.",
-    location: "Sabzevar, Iran — Open to remote",
+    location: "Khorasan Razavi, Iran — Open to remote",
     cta: "View Projects",
     resume: "Resume",
     scroll: "Scroll",
