@@ -3,14 +3,8 @@
 import { Mail, Globe } from "lucide-react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import { useLanguage } from "@/context/language-context";
+import { navItems, siteContent } from "@/config/nav";
 
-const navItems = [
-  { en: "Home", fa: "خانه", href: "#home" },
-  { en: "About", fa: "درباره من", href: "#about" },
-  { en: "Skills", fa: "مهارت‌ها", href: "#skills" },
-  { en: "Projects", fa: "پروژه‌ها", href: "#projects" },
-  { en: "Contact", fa: "تماس", href: "#contact" },
-];
 
 const content = {
   en: {
@@ -29,7 +23,7 @@ const content = {
 
 export function Sidebar() {
   const { language, toggleLanguage } = useLanguage();
-  const t = content[language];
+  const t = siteContent[language];
 
   return (
     <aside className="hidden lg:flex lg:flex-col lg:justify-between lg:fixed lg:top-0 lg:inset-s-0 lg:h-screen lg:w-90 lg:p-10">

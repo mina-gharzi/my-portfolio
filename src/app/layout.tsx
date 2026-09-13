@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { generalSans, pinar } from "@/lib/fonts";
 import { LanguageProvider } from "@/context/language-context";
 import { Sidebar } from "@/components/layout/sidebar";
+import { MobileNav } from "@/components/layout/mobile-nav";
 import { MainContent } from "@/components/layout/main-content";
 import "./globals.css";
 
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={`${generalSans.variable} ${pinar.variable} font-en antialiased`}>
         <LanguageProvider>
           <Sidebar />
+          <MobileNav />
           <MainContent>{children}</MainContent>
         </LanguageProvider>
       </body>
