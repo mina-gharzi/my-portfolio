@@ -13,15 +13,14 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>("en");
-
-  useEffect(() => {
-    const stored = localStorage.getItem("language") as Language | null;
-    if (stored === "en" || stored === "fa") {
-      setLanguage(stored);
-    }
-  }, []);
+export function LanguageProvider({
+  children,
+  initialLanguage,
+}: {
+  children: ReactNode;
+  initialLanguage: Language;
+}) {
+  const [language, setLanguage] = useState<Language>(initialLanguage);
 
   useEffect(() => {
     const html = document.documentElement;
@@ -29,6 +28,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     html.dir = language === "fa" ? "rtl" : "ltr";
     document.body.classList.remove("font-en", "font-fa");
     document.body.classList.add(language === "fa" ? "font-fa" : "font-en");
+
+    // Cookie is the source of truth read by the server on the next request
+    document.cookie = `language=${language}; path=/; max-age=31536000; SameSite=Lax`;
+    // Keep localStorage too, harmless fallback / for any client-only reads
     localStorage.setItem("language", language);
 
     // Keep <title> and meta description in sync with the active language

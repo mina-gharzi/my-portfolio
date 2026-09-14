@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { generalSans, pinar } from "@/lib/fonts";
 import { LanguageProvider } from "@/context/language-context";
 import { Sidebar } from "@/components/layout/sidebar";
@@ -12,50 +13,24 @@ export const metadata: Metadata = {
   description: "Frontend Developer specializing in React and TypeScript.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const cookieStore = await cookies();
+  const langCookie = cookieStore.get("language")?.value;
+  const initialLanguage: "en" | "fa" = langCookie === "fa" ? "fa" : "en";
+  const dir = initialLanguage === "fa" ? "rtl" : "ltr";
+  const fontClass = initialLanguage === "fa" ? "font-fa" : "font-en";
+
   return (
-    <html lang="en" dir="ltr" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function () {
-                try {
-                  var lang = localStorage.getItem("language");
-                  if (lang === "fa") {
-                    document.documentElement.lang = "fa";
-                    document.documentElement.dir = "rtl";
-                  }
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
-      </head>
+    <html lang={initialLanguage} dir={dir} suppressHydrationWarning>
       <body
-        className={`${generalSans.variable} ${pinar.variable} font-en antialiased`}
+        className={`${generalSans.variable} ${pinar.variable} ${fontClass} antialiased`}
         suppressHydrationWarning
       >
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function () {
-                try {
-                  var lang = localStorage.getItem("language");
-                  if (lang === "fa") {
-                    document.body.classList.remove("font-en");
-                    document.body.classList.add("font-fa");
-                  }
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
-        <LanguageProvider>
+        <LanguageProvider initialLanguage={initialLanguage}>
           <Sidebar />
           <MobileNav />
           <MainContent>
