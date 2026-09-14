@@ -3,6 +3,7 @@ import { About } from "@/components/sections/about";
 import { Container } from "@/components/layout/container";
 import { Skills } from "@/components/sections/skills";
 import { Projects } from "@/components/sections/projects";
+import { Contact } from "@/components/sections/contact";
 
 export default function Home() {
   return (
@@ -29,7 +30,7 @@ export default function Home() {
 
       <section id="contact" className="min-h-screen flex items-center">
         <Container>
-          <h2 className="text-4xl font-bold text-text">Contact</h2>
+          <h2 className="text-4xl font-bold text-text"><Contact /></h2>
         </Container>
       </section>
     </>
