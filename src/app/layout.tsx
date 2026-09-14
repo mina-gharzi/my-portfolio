@@ -8,9 +8,43 @@ import { MainContent } from "@/components/layout/main-content";
 import { Footer } from "@/components/layout/footer";
 import "./globals.css";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Mina Gharzi — Frontend Developer",
-  description: "Frontend Developer specializing in React and TypeScript.",
+  description:
+    "Frontend Developer specializing in React and TypeScript. Portfolio of full-stack and frontend projects including a job board, booking platform, and admin dashboard.",
+  keywords: [
+    "Mina Gharzi",
+    "Frontend Developer",
+    "React Developer",
+    "TypeScript",
+    "Next.js Developer",
+    "Web Developer Portfolio",
+  ],
+  authors: [{ name: "Mina Gharzi" }],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Mina Gharzi — Frontend Developer",
+    description:
+      "Frontend Developer specializing in React and TypeScript. Portfolio of full-stack and frontend projects.",
+    url: siteUrl,
+    siteName: "Mina Gharzi Portfolio",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mina Gharzi — Frontend Developer",
+    description:
+      "Frontend Developer specializing in React and TypeScript. Portfolio of full-stack and frontend projects.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default async function RootLayout({
