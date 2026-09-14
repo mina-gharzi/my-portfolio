@@ -60,7 +60,7 @@ export function Skills() {
           <h2 className="text-2xl font-bold text-text">{t.title}</h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-10">
           {categories.map((category) => (
             <div key={category.title.en}>
               <h3 className="text-sm font-bold uppercase tracking-widest text-text mb-4">
