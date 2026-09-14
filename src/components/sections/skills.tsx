@@ -2,7 +2,7 @@
 
 import { useLanguage } from "@/context/language-context";
 import { Container } from "@/components/layout/container";
-
+import { FadeIn } from "@/components/ui/fade-in";
 const content = {
   en: {
     eyebrow: "02",
@@ -54,6 +54,7 @@ export function Skills() {
   return (
     <section id="skills" className="py-24 md:py-32">
       <Container>
+        <FadeIn>
         <div className="flex items-baseline gap-3 mb-14">
           <span className="text-sm font-mono text-accent">{t.eyebrow}</span>
           <h2 className="text-2xl font-bold text-text">{t.title}</h2>
@@ -75,6 +76,7 @@ export function Skills() {
             </div>
           ))}
         </div>
+        </FadeIn>
       </Container>
     </section>
   );

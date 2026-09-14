@@ -2,6 +2,7 @@
 
 import { useLanguage } from "@/context/language-context";
 import { Container } from "@/components/layout/container";
+import { FadeIn } from "@/components/ui/fade-in";
 
 const content = {
   en: {
@@ -46,6 +47,7 @@ export function About() {
   return (
     <section id="about" className="py-24 md:py-32">
       <Container>
+        <FadeIn>
         <div className="grid md:grid-cols-[minmax(0,140px)_1fr] gap-8 md:gap-16">
           {/* Section label */}
           <div className="flex md:flex-col items-baseline md:items-start gap-3 md:gap-2">
@@ -84,6 +86,7 @@ export function About() {
             <p className="mt-8 text-sm text-text-muted/70">🎓 {t.education}</p>
           </div>
         </div>
+        </FadeIn>
       </Container>
     </section>
   );

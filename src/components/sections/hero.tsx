@@ -7,7 +7,7 @@ import { useLanguage } from "@/context/language-context";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { cn } from "@/lib/utils";
-
+import { FadeIn } from "@/components/ui/fade-in";
 const content = {
   en: {
     badge: "Available for work",
@@ -95,6 +95,7 @@ export function Hero() {
       className="relative min-h-screen flex items-center py-24"
     >
       <Container>
+        <FadeIn>
         <div className="max-w-2xl">
           {/* Availability badge */}
           <div
@@ -203,6 +204,7 @@ export function Hero() {
             </div>
           </div>
         </div>
+        </FadeIn>
       </Container>
 
       {/* Scroll indicator */}

@@ -7,7 +7,7 @@ import { Container } from "@/components/layout/container";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { projects } from "@/config/projects";
-
+import { FadeIn } from "@/components/ui/fade-in";
 const content = {
   en: { eyebrow: "03", title: "Projects" },
   fa: { eyebrow: "۰۳", title: "پروژه‌ها" },
@@ -20,6 +20,7 @@ export function Projects() {
   return (
     <section id="projects" className="py-24 md:py-32">
       <Container>
+        <FadeIn>
         <div className="flex items-baseline gap-3 mb-14">
           <span className="text-sm font-mono text-accent">{t.eyebrow}</span>
           <h2 className="text-2xl font-bold text-text">{t.title}</h2>
@@ -87,6 +88,7 @@ export function Projects() {
             </Card>
           ))}
         </div>
+        </FadeIn>
       </Container>
     </section>
   );

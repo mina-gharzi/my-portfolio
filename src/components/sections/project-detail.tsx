@@ -7,7 +7,7 @@ import { Container } from "@/components/layout/container";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import type { Project } from "@/config/projects";
-
+import { FadeIn } from "@/components/ui/fade-in";
 const labels = {
   en: {
     back: "Back to projects",
@@ -42,6 +42,7 @@ export function ProjectDetail({ project }: { project: Project }) {
   return (
     <article className="py-24 md:py-32">
       <Container className="max-w-3xl">
+        <FadeIn>
         <ButtonLink
           href="/#projects"
           variant="ghost"
@@ -175,6 +176,7 @@ export function ProjectDetail({ project }: { project: Project }) {
             </p>
           </section>
         </div>
+        </FadeIn>
       </Container>
     </article>
   );
