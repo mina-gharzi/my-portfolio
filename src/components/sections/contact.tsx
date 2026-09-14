@@ -27,6 +27,7 @@ const content = {
     sending: "Sending...",
     success: "Thanks! Your message has been sent — I'll get back to you soon.",
     error: "Something went wrong. Please try again or email me directly.",
+    rateLimited: "You've sent a few messages already — please wait a bit before trying again.",
   },
   fa: {
     eyebrow: "۰۴",
@@ -40,10 +41,11 @@ const content = {
     sending: "در حال ارسال...",
     success: "ممنون! پیامت ارسال شد — به‌زودی جواب می‌دم.",
     error: "مشکلی پیش اومد. دوباره تلاش کن یا مستقیم برام ایمیل بزن.",
+    rateLimited: "چندتا پیام پشت‌سرهم فرستادی — لطفاً کمی صبر کن و دوباره امتحان کن.",
   },
 };
 
-type Status = "idle" | "loading" | "success" | "error";
+type Status = "idle" | "loading" | "success" | "error" | "rate_limited";
 
 export function Contact() {
   const { language } = useLanguage();
@@ -66,6 +68,8 @@ export function Contact() {
     if (result.success) {
       setStatus("success");
       reset();
+    } else if (result.errorCode === "rate_limited") {
+      setStatus("rate_limited");
     } else {
       setStatus("error");
     }
@@ -96,10 +100,12 @@ export function Contact() {
                 id="name"
                 type="text"
                 {...register("name")}
+                aria-invalid={!!errors.name}
+                aria-describedby={errors.name ? "name-error" : undefined}
                 className="w-full px-4 py-2.5 bg-bg-secondary border border-border rounded-button text-text focus:outline-none focus:ring-2 focus:ring-accent/50"
               />
               {errors.name && (
-                <p className="text-sm text-red-400 mt-1.5">
+                <p id="name-error" className="text-sm text-red-400 mt-1.5">
                   {errors.name.message}
                 </p>
               )}
@@ -116,10 +122,12 @@ export function Contact() {
                 id="email"
                 type="email"
                 {...register("email")}
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? "email-error" : undefined}
                 className="w-full px-4 py-2.5 bg-bg-secondary border border-border rounded-button text-text focus:outline-none focus:ring-2 focus:ring-accent/50"
               />
               {errors.email && (
-                <p className="text-sm text-red-400 mt-1.5">
+                <p id="email-error" className="text-sm text-red-400 mt-1.5">
                   {errors.email.message}
                 </p>
               )}
@@ -136,10 +144,12 @@ export function Contact() {
                 id="message"
                 rows={5}
                 {...register("message")}
+                aria-invalid={!!errors.message}
+                aria-describedby={errors.message ? "message-error" : undefined}
                 className="w-full px-4 py-2.5 bg-bg-secondary border border-border rounded-button text-text resize-none focus:outline-none focus:ring-2 focus:ring-accent/50"
               />
               {errors.message && (
-                <p className="text-sm text-red-400 mt-1.5">
+                <p id="message-error" className="text-sm text-red-400 mt-1.5">
                   {errors.message.message}
                 </p>
               )}
@@ -168,6 +178,12 @@ export function Contact() {
               <p className="flex items-center gap-2 text-sm text-red-400">
                 <XCircle size={16} />
                 {t.error}
+              </p>
+            )}
+            {status === "rate_limited" && (
+              <p className="flex items-center gap-2 text-sm text-red-400">
+                <XCircle size={16} />
+                {t.rateLimited}
               </p>
             )}
           </form>

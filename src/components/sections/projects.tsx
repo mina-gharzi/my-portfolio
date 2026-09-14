@@ -8,6 +8,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn } from "@/components/ui/fade-in";
 import { projects } from "@/config/projects";
+import Link from "next/link";
+import Image from "next/image";
 
 const content = {
   en: { eyebrow: "03", title: "Projects" },
@@ -39,12 +41,14 @@ export function Projects() {
                   key={project.id}
                   className="p-0 overflow-hidden flex flex-col"
                 >
-                  <div className="aspect-video bg-bg border-b border-border overflow-hidden">
+                  <div className="relative aspect-video bg-bg border-b border-border overflow-hidden">
                     {project.image ? (
-                      <img
+                      <Image
                         src={project.image}
                         alt={project.name}
-                        className="w-full h-full object-cover object-top"
+                        fill
+                        sizes="(min-width: 768px) 50vw, 100vw"
+                        className="object-cover object-top"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-text-muted/40 text-sm">
@@ -54,11 +58,11 @@ export function Projects() {
                   </div>
 
                   <div className="p-5 md:p-6 flex flex-col flex-1">
-                    <a href={`/projects/${project.id}`} className="block">
+                    <Link href={`/projects/${project.id}`} className="block">
                       <h3 className="text-lg md:text-xl font-bold text-text mb-2 hover:text-accent transition-colors">
                         {project.name}
                       </h3>
-                    </a>
+                    </Link>
 
                     <p className="text-sm text-text-muted leading-relaxed mb-4 line-clamp-3">
                       {project.description[language]}

@@ -5,17 +5,6 @@ import { SiGithub } from "@icons-pack/react-simple-icons";
 import { useLanguage } from "@/context/language-context";
 import { navItems, siteContent } from "@/config/nav";
 
-const content = {
-  en: {
-    name: "Mina Gharzi",
-    title: "Frontend Developer",
-  },
-  fa: {
-    name: "مینا قارزی",
-    title: "توسعه‌دهنده‌ی فرانت‌اند",
-  },
-};
-
 export function Sidebar() {
   const { language, toggleLanguage } = useLanguage();
   const t = siteContent[language];

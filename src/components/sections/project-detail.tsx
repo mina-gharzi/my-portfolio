@@ -8,6 +8,10 @@ import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import type { Project } from "@/config/projects";
 import { FadeIn } from "@/components/ui/fade-in";
+import Link from "next/link";
+import Image from "next/image";
+import { buttonStyles } from "@/components/ui/button";
+
 const labels = {
   en: {
     back: "Back to projects",
@@ -43,139 +47,140 @@ export function ProjectDetail({ project }: { project: Project }) {
     <article className="py-24 md:py-32">
       <Container className="max-w-3xl">
         <FadeIn>
-        <ButtonLink
-          href="/#projects"
-          variant="ghost"
-          size="sm"
-          className="mb-10 -ms-3"
-        >
-          <ArrowLeft size={16} className="me-2 rtl:-scale-x-100" />
-          {t.back}
-        </ButtonLink>
-
-        <h1 className="text-3xl md:text-4xl font-bold text-text mb-4">
-          {project.name}
-        </h1>
-
-        <div className="flex flex-wrap gap-2 mb-6">
-          {project.tech.map((tech) => (
-            <Badge key={tech}>{tech}</Badge>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-4 mb-12">
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm text-text-muted hover:text-accent transition-colors"
+          <Link
+            href="/#projects"
+            className={`${buttonStyles("ghost", "sm")} mb-10 -ms-3`}
           >
-            <SiGithub size={16} />
-            {t.code}
-          </a>
-          {project.live && (
+            <ArrowLeft size={16} className="me-2 rtl:-scale-x-100" />
+            {t.back}
+          </Link>
+
+          <h1 className="text-3xl md:text-4xl font-bold text-text mb-4">
+            {project.name}
+          </h1>
+
+          <div className="flex flex-wrap gap-2 mb-6">
+            {project.tech.map((tech) => (
+              <Badge key={tech}>{tech}</Badge>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-4 mb-12">
             <a
-              href={project.live}
+              href={project.github}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm text-text-muted hover:text-accent transition-colors"
             >
-              <ExternalLink size={16} />
-              {t.live}
+              <SiGithub size={16} />
+              {t.code}
             </a>
-          )}
-        </div>
-
-        {project.image && (
-          <div className="rounded-card overflow-hidden border border-border mb-16">
-            <img
-              src={project.image}
-              alt={project.name}
-              className="w-full h-auto"
-            />
+            {project.live && (
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-text-muted hover:text-accent transition-colors"
+              >
+                <ExternalLink size={16} />
+                {t.live}
+              </a>
+            )}
           </div>
-        )}
 
-        <div className="flex flex-col gap-14">
-          <section>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-accent mb-4">
-              {t.overview}
-            </h2>
-            <p className="text-text-muted leading-relaxed">
-              {project.overview[language]}
-            </p>
-          </section>
+          {project.image && (
+            <div className="relative aspect-video rounded-card overflow-hidden border border-border mb-16">
+              <Image
+                src={project.image}
+                alt={project.name}
+                fill
+                sizes="(min-width: 768px) 768px, 100vw"
+                className="object-cover"
+                priority
+              />
+            </div>
+          )}
 
-          <section>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-accent mb-4">
-              {t.problem}
-            </h2>
-            <p className="text-text-muted leading-relaxed">
-              {project.problem[language]}
-            </p>
-          </section>
+          <div className="flex flex-col gap-14">
+            <section>
+              <h2 className="text-sm font-bold uppercase tracking-widest text-accent mb-4">
+                {t.overview}
+              </h2>
+              <p className="text-text-muted leading-relaxed">
+                {project.overview[language]}
+              </p>
+            </section>
 
-          <section>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-accent mb-4">
-              {t.solution}
-            </h2>
-            <p className="text-text-muted leading-relaxed">
-              {project.solution[language]}
-            </p>
-          </section>
+            <section>
+              <h2 className="text-sm font-bold uppercase tracking-widest text-accent mb-4">
+                {t.problem}
+              </h2>
+              <p className="text-text-muted leading-relaxed">
+                {project.problem[language]}
+              </p>
+            </section>
 
-          <section>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-accent mb-4">
-              {t.features}
-            </h2>
-            <ul className="flex flex-col gap-3">
-              {project.features.map((feature, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-3 text-text-muted leading-relaxed"
-                >
-                  <span className="mt-2 w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
-                  {feature[language]}
-                </li>
-              ))}
-            </ul>
-          </section>
+            <section>
+              <h2 className="text-sm font-bold uppercase tracking-widest text-accent mb-4">
+                {t.solution}
+              </h2>
+              <p className="text-text-muted leading-relaxed">
+                {project.solution[language]}
+              </p>
+            </section>
 
-          <section>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-accent mb-4">
-              {t.architecture}
-            </h2>
-            <ul className="flex flex-col gap-3">
-              {project.architecture.map((point, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-3 text-text-muted leading-relaxed"
-                >
-                  <span className="mt-2 w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
-                  {point[language]}
-                </li>
-              ))}
-            </ul>
-          </section>
+            <section>
+              <h2 className="text-sm font-bold uppercase tracking-widest text-accent mb-4">
+                {t.features}
+              </h2>
+              <ul className="flex flex-col gap-3">
+                {project.features.map((feature, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-3 text-text-muted leading-relaxed"
+                  >
+                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                    {feature[language]}
+                  </li>
+                ))}
+              </ul>
+            </section>
 
-          <section>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-accent mb-4">
-              {t.challenges}
-            </h2>
-            <p className="text-text-muted leading-relaxed">
-              {project.challenges[language]}
-            </p>
-          </section>
+            <section>
+              <h2 className="text-sm font-bold uppercase tracking-widest text-accent mb-4">
+                {t.architecture}
+              </h2>
+              <ul className="flex flex-col gap-3">
+                {project.architecture.map((point, i) => (
+                  <li
+                    key={i}
+                    className="flex items-start gap-3 text-text-muted leading-relaxed"
+                  >
+                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                    {point[language]}
+                  </li>
+                ))}
+              </ul>
+            </section>
 
-          <section>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-accent mb-4">
-              {t.learned}
-            </h2>
-            <p className="text-text-muted leading-relaxed">
-              {project.learned[language]}
-            </p>
-          </section>
-        </div>
+            <section>
+              <h2 className="text-sm font-bold uppercase tracking-widest text-accent mb-4">
+                {t.challenges}
+              </h2>
+              <p className="text-text-muted leading-relaxed">
+                {project.challenges[language]}
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-sm font-bold uppercase tracking-widest text-accent mb-4">
+                {t.learned}
+              </h2>
+              <p className="text-text-muted leading-relaxed">
+                {project.learned[language]}
+              </p>
+            </section>
+          </div>
         </FadeIn>
       </Container>
     </article>

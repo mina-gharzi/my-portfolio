@@ -1,7 +1,7 @@
 import { AnchorHTMLAttributes, ButtonHTMLAttributes, forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
-const buttonStyles = (
+export const buttonStyles = (
   variant: "primary" | "secondary" | "ghost",
   size: "sm" | "md" | "lg"
 ) =>
