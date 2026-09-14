@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { siteContent } from "@/config/nav";
 
 type Language = "en" | "fa";
 
@@ -29,6 +30,27 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     document.body.classList.remove("font-en", "font-fa");
     document.body.classList.add(language === "fa" ? "font-fa" : "font-en");
     localStorage.setItem("language", language);
+
+    // Keep <title> and meta description in sync with the active language
+    const t = siteContent[language];
+    document.title = `${t.name} — ${t.title}`;
+
+    const descriptionTag = document.querySelector('meta[name="description"]');
+    if (descriptionTag) {
+      descriptionTag.setAttribute("content", t.description);
+    }
+
+    const ogTitleTag = document.querySelector('meta[property="og:title"]');
+    if (ogTitleTag) {
+      ogTitleTag.setAttribute("content", `${t.name} — ${t.title}`);
+    }
+
+    const ogDescriptionTag = document.querySelector(
+      'meta[property="og:description"]'
+    );
+    if (ogDescriptionTag) {
+      ogDescriptionTag.setAttribute("content", t.description);
+    }
   }, [language]);
 
   const toggleLanguage = () => {

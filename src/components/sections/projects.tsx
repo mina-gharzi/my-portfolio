@@ -12,15 +12,15 @@ import Link from "next/link";
 import Image from "next/image";
 
 const content = {
-  en: { eyebrow: "03", title: "Projects" },
-  fa: { eyebrow: "۰۳", title: "پروژه‌ها" },
+  en: { eyebrow: "03", title: "Projects", featured: "Featured Project" },
+  fa: { eyebrow: "۰۳", title: "پروژه‌ها", featured: "پروژه‌ی ویژه" },
 };
-
-const MAX_VISIBLE_TAGS = 5;
 
 export function Projects() {
   const { language } = useLanguage();
   const t = content[language];
+
+  const [featuredProject, ...otherProjects] = projects;
 
   return (
     <section id="projects" className="py-24 md:py-32">
@@ -31,11 +31,76 @@ export function Projects() {
             <h2 className="text-2xl font-bold text-text">{t.title}</h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {projects.map((project) => {
-              const visibleTags = project.tech.slice(0, MAX_VISIBLE_TAGS);
-              const hiddenCount = project.tech.length - visibleTags.length;
+          {/* Featured project — large, full-width */}
+          <Card className="p-0 overflow-hidden mb-8">
+            <div className="grid md:grid-cols-2">
+              <div className="relative aspect-video md:aspect-auto bg-bg border-b md:border-b-0 md:border-e border-border overflow-hidden">
+                {featuredProject.image ? (
+                  <Image
+                    src={featuredProject.image}
+                    alt={featuredProject.name}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover object-top"
+                    priority
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-text-muted/40 text-sm">
+                    {featuredProject.name}
+                  </div>
+                )}
+              </div>
 
+              <div className="p-6 md:p-8 flex flex-col">
+                <span className="text-xs font-bold uppercase tracking-widest text-accent mb-3">
+                  {t.featured}
+                </span>
+
+                <Link href={`/projects/${featuredProject.id}`} className="block">
+                  <h3 className="text-2xl md:text-3xl font-bold text-text mb-3 hover:text-accent transition-colors">
+                    {featuredProject.name}
+                  </h3>
+                </Link>
+
+                <p className="text-sm md:text-base text-text-muted leading-relaxed mb-5">
+                  {featuredProject.description[language]}
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {featuredProject.tech.map((tech) => (
+                    <Badge key={tech}>{tech}</Badge>
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-4 mt-auto pt-2">
+                  <a
+                    href={featuredProject.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm text-text-muted hover:text-accent transition-colors"
+                  >
+                    <SiGithub size={16} />
+                    {language === "en" ? "Code" : "کد"}
+                  </a>
+                  {featuredProject.live && (
+                    <a
+                      href={featuredProject.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-text-muted hover:text-accent transition-colors"
+                    >
+                      <ExternalLink size={16} />
+                      {language === "en" ? "Live Demo" : "دمو"}
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          {/* Other projects — compact grid, keeps priority order */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {otherProjects.map((project) => {
               return (
                 <Card
                   key={project.id}
@@ -47,7 +112,7 @@ export function Projects() {
                         src={project.image}
                         alt={project.name}
                         fill
-                        sizes="(min-width: 768px) 50vw, 100vw"
+                        sizes="(min-width: 768px) 33vw, 100vw"
                         className="object-cover object-top"
                       />
                     ) : (
@@ -57,36 +122,38 @@ export function Projects() {
                     )}
                   </div>
 
-                  <div className="p-5 md:p-6 flex flex-col flex-1">
+                  <div className="p-5 flex flex-col flex-1">
                     <Link href={`/projects/${project.id}`} className="block">
-                      <h3 className="text-lg md:text-xl font-bold text-text mb-2 hover:text-accent transition-colors">
+                      <h3 className="text-base font-bold text-text mb-2 hover:text-accent transition-colors">
                         {project.name}
                       </h3>
                     </Link>
 
-                    <p className="text-sm text-text-muted leading-relaxed mb-4 line-clamp-3">
+                    <p className="text-xs text-text-muted leading-relaxed mb-4 line-clamp-3">
                       {project.description[language]}
                     </p>
 
-                    <div className="flex flex-wrap gap-2 mb-5">
-                      {visibleTags.map((tech) => (
-                        <Badge key={tech}>{tech}</Badge>
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {project.tech.slice(0, 3).map((tech) => (
+                        <Badge key={tech} className="text-[11px] px-2 py-0.5">
+                          {tech}
+                        </Badge>
                       ))}
-                      {hiddenCount > 0 && (
-                        <Badge className="text-text-muted/70">
-                          +{hiddenCount}
+                      {project.tech.length > 3 && (
+                        <Badge className="text-[11px] px-2 py-0.5 text-text-muted/70">
+                          +{project.tech.length - 3}
                         </Badge>
                       )}
                     </div>
 
-                    <div className="flex items-center gap-4 mt-auto pt-2">
+                    <div className="flex items-center gap-3 mt-auto pt-1">
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm text-text-muted hover:text-accent transition-colors"
+                        className="flex items-center gap-1.5 text-xs text-text-muted hover:text-accent transition-colors"
                       >
-                        <SiGithub size={16} />
+                        <SiGithub size={14} />
                         {language === "en" ? "Code" : "کد"}
                       </a>
                       {project.live && (
@@ -94,9 +161,9 @@ export function Projects() {
                           href={project.live}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-2 text-sm text-text-muted hover:text-accent transition-colors"
+                          className="flex items-center gap-1.5 text-xs text-text-muted hover:text-accent transition-colors"
                         >
-                          <ExternalLink size={16} />
+                          <ExternalLink size={14} />
                           {language === "en" ? "Live Demo" : "دمو"}
                         </a>
                       )}

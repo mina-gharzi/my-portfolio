@@ -180,7 +180,7 @@ export function Hero() {
               </ButtonLink>
 
               <ButtonLink
-                href="public/resume/resume.pdf"
+                href="/resume/resume.pdf"
                 download
                 variant="secondary"
                 size="lg"
