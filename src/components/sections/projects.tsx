@@ -38,7 +38,11 @@ export function Projects() {
                 {featuredProject.image ? (
                   <Image
                     src={featuredProject.image}
-                    alt={featuredProject.name}
+                    alt={
+                      language === "en"
+                        ? `Screenshot of ${featuredProject.name} homepage`
+                        : `اسکرین‌شات صفحه‌ی اصلی ${featuredProject.name}`
+                    }
                     fill
                     sizes="(min-width: 768px) 50vw, 100vw"
                     className="object-cover object-top"
@@ -56,7 +60,10 @@ export function Projects() {
                   {t.featured}
                 </span>
 
-                <Link href={`/projects/${featuredProject.id}`} className="block">
+                <Link
+                  href={`/projects/${featuredProject.id}`}
+                  className="block"
+                >
                   <h3 className="text-2xl md:text-3xl font-bold text-text mb-3 hover:text-accent transition-colors">
                     {featuredProject.name}
                   </h3>
@@ -110,7 +117,11 @@ export function Projects() {
                     {project.image ? (
                       <Image
                         src={project.image}
-                        alt={project.name}
+                        alt={
+                          language === "en"
+                            ? `Screenshot of ${project.name} homepage`
+                            : `اسکرین‌شات صفحه‌ی اصلی ${project.name}`
+                        }
                         fill
                         sizes="(min-width: 768px) 33vw, 100vw"
                         className="object-cover object-top"

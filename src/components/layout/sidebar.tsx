@@ -12,8 +12,8 @@ export function Sidebar() {
   return (
     <aside className="hidden lg:flex lg:flex-col lg:justify-between lg:fixed lg:top-0 lg:inset-s-0 lg:h-screen lg:w-90 lg:p-10">
       <div>
-        <h1 className="text-3xl font-bold text-text mb-2">{t.name}</h1>
-        <h2 className="text-lg text-text-muted mb-4">{t.title}</h2>
+        <p className="text-3xl font-bold text-text mb-2">{t.name}</p>
+        <p className="text-lg text-text-muted mb-4">{t.title}</p>
 
         <nav>
           <ul className="flex flex-col gap-4">

@@ -52,7 +52,7 @@ export function MobileNav() {
             <X size={24} />
           </button>
 
-          <h2 className="text-xl font-bold text-text mb-1">{t.name}</h2>
+          <p className="text-xl font-bold text-text mb-1">{t.name}</p>
           <p className="text-sm text-text-muted mb-8">{t.title}</p>
 
           <nav>
