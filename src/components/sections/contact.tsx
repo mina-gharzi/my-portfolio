@@ -27,7 +27,8 @@ const content = {
     sending: "Sending...",
     success: "Thanks! Your message has been sent — I'll get back to you soon.",
     error: "Something went wrong. Please try again or email me directly.",
-    rateLimited: "You've sent a few messages already — please wait a bit before trying again.",
+    rateLimited:
+      "You've sent a few messages already — please wait a bit before trying again.",
   },
   fa: {
     eyebrow: "۰۴",
@@ -41,7 +42,8 @@ const content = {
     sending: "در حال ارسال...",
     success: "ممنون! پیامت ارسال شد — به‌زودی جواب می‌دم.",
     error: "مشکلی پیش اومد. دوباره تلاش کن یا مستقیم برام ایمیل بزن.",
-    rateLimited: "چندتا پیام پشت‌سرهم فرستادی — لطفاً کمی صبر کن و دوباره امتحان کن.",
+    rateLimited:
+      "چندتا پیام پشت‌سرهم فرستادی — لطفاً کمی صبر کن و دوباره امتحان کن.",
   },
 };
 
@@ -87,6 +89,7 @@ export function Contact() {
 
           <form
             onSubmit={handleSubmit(onSubmit)}
+            noValidate
             className="flex flex-col gap-5"
           >
             <div>
