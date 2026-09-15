@@ -1,5 +1,7 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { Mail, Globe } from "lucide-react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import { useLanguage } from "@/context/language-context";
@@ -8,6 +10,7 @@ import { navItems, siteContent } from "@/config/nav";
 export function Sidebar() {
   const { language, toggleLanguage } = useLanguage();
   const t = siteContent[language];
+  const pathname = usePathname();
 
   return (
     <aside className="hidden lg:flex lg:flex-col lg:justify-between lg:fixed lg:top-0 lg:inset-s-0 lg:h-screen lg:w-90 lg:p-10">
@@ -17,16 +20,19 @@ export function Sidebar() {
 
         <nav>
           <ul className="flex flex-col gap-4">
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  className="text-sm font-bold uppercase tracking-widest text-text-muted hover:text-accent transition-colors"
-                >
-                  {language === "fa" ? item.fa : item.en}
-                </a>
-              </li>
-            ))}
+            {navItems.map((item) => {
+              const href = pathname === "/" ? item.href : `/${item.href}`;
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={href}
+                    className="text-sm font-bold uppercase tracking-widest text-text-muted hover:text-accent transition-colors"
+                  >
+                    {language === "fa" ? item.fa : item.en}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
       </div>
