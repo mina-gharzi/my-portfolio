@@ -1,15 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X, Mail, Globe } from "lucide-react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import { useLanguage } from "@/context/language-context";
 import { navItems, siteContent } from "@/config/nav";
 
+
 export function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const { language, toggleLanguage } = useLanguage();
   const t = siteContent[language];
+  const pathname = usePathname();
 
   const closeMenu = () => setIsOpen(false);
 
@@ -57,17 +60,20 @@ export function MobileNav() {
 
           <nav>
             <ul className="flex flex-col gap-5">
-              {navItems.map((item) => (
-                <li key={item.href}>
-                  <a
-                    href={item.href}
-                    onClick={closeMenu}
-                    className="text-base font-bold uppercase tracking-widest text-text hover:text-accent transition-colors"
-                  >
-                    {language === "fa" ? item.fa : item.en}
-                  </a>
-                </li>
-              ))}
+              {navItems.map((item) => {
+                const href = pathname === "/" ? item.href : `/${item.href}`;
+                return (
+                  <li key={item.href}>
+                    <a
+                      href={href}
+                      onClick={closeMenu}
+                      className="text-base font-bold uppercase tracking-widest text-text hover:text-accent transition-colors"
+                    >
+                      {language === "fa" ? item.fa : item.en}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         </div>
