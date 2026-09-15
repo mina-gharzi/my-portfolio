@@ -84,7 +84,7 @@ export function MobileNav() {
               <SiGithub size={20} />
             </a>
             <a
-              href="mailto:Minagharzipv@gmail.com"
+              href="mailto:minagharzipv@gmail.com"
               aria-label="Email"
               className="text-text-muted hover:text-accent transition-colors"
             >

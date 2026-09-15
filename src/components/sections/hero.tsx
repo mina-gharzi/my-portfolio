@@ -37,7 +37,7 @@ const roles = {
 
 const socials = [
   { icon: SiGithub, href: "https://github.com/mina-gharzi", label: "GitHub" },
-  { icon: Mail, href: "mailto:Minagharzipv@gmail.com", label: "Email" },
+  { icon: Mail, href: "mailto:minagharzipv@gmail.com", label: "Email" },
 ];
 
 export function Hero() {
@@ -138,7 +138,7 @@ export function Hero() {
               <span className="text-xl md:text-2xl font-bold text-text-muted">
                 {displayText}
               </span>
-              <span className="w-0.5 h-6 md:h-7 bg-accent ms-1 animate-caret" />
+              <span className="w-0.5 h-6 md:h-7 bg-accent ms-1 animate-blink" />
             </div>
 
             {/* Subtitle */}

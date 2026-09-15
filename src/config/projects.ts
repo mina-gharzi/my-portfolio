@@ -76,7 +76,7 @@ export const projects: Project[] = [
       fa: "یک پلتفرم رزرو چند-هتلی با فلوی کامل چندمرحله‌ای — جست‌وجو، انتخاب اتاق، اطلاعات مهمان، پرداخت و تایید — با یک لایه‌ی سرویس متمرکز برای قیمت‌گذاری.",
     },
     tech: ["React", "TypeScript", "Zustand", "TanStack Query", "React Hook Form", "Zod", "Playwright"],
-    github: "https://github.com/mina-gharzi",
+    github: "https://github.com/mina-gharzi/Stayly",
     live: "https://staylybooking.netlify.app/",
     image: "/projects/stayly.png",
     featured: true,
