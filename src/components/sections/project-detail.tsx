@@ -95,7 +95,7 @@ export function ProjectDetail({ project }: { project: Project }) {
                 alt={project.name}
                 fill
                 sizes="(min-width: 768px) 768px, 100vw"
-                className="object-cover"
+                className="object-cover object-top"
                 priority
               />
             </div>

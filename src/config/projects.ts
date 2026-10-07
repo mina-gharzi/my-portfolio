@@ -69,6 +69,51 @@ export const projects: Project[] = [
     },
   },
   {
+    id: "kanban",
+    name: "Kanban",
+    description: {
+      en: "A real-time collaborative Kanban board with drag-and-drop, optimistic updates, role-based board sharing, and security enforced in the database through Row Level Security — verified by 158 automated checks against a live Supabase instance.",
+      fa: "یک بورد کانبان collaborative با sync لحظه‌ای، drag-and-drop، optimistic update، اشتراک‌گذاری بورد با نقش‌های مختلف و امنیتی که در خود دیتابیس با Row Level Security اعمال می‌شه — با ۱۵۸ بررسی خودکار روی یک دیتابیس واقعی Supabase تأیید شده.",
+    },
+    tech: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Row Level Security", "TanStack Query", "dnd-kit", "Tailwind CSS", "Vitest", "Playwright"],
+    github: "https://github.com/mina-gharzi/kanban-app",
+    live: "https://kanban-app-nine-red.vercel.app/",
+    image: "/projects/kanbanapp.png",
+    featured: true,
+    overview: {
+      en: "Kanban is a Persian-first (RTL) board app where several people can work on the same board at once. Changes appear live for everyone, boards can be shared with owner, editor, and viewer roles, and accounts can be deleted safely with ownership transfer.",
+      fa: "Kanban یک اپ بورد فارسی‌محور (RTL) هست که چند نفر می‌تونن هم‌زمان روی یک بورد کار کنن. تغییرات برای همه لحظه‌ای نشون داده می‌شه، بورد با نقش‌های مالک، ویرایشگر و فقط‌خواندنی به اشتراک گذاشته می‌شه، و حذف حساب با انتقال مالکیت بوردها به‌شکل امن انجام می‌شه.",
+    },
+    problem: {
+      en: "Collaborative boards combine hard problems: several tabs and users editing the same data at once, drags that must feel instant yet stay in the right order, and sharing rules that must hold even if someone bypasses the UI and talks to the database API directly.",
+      fa: "بوردهای collaborative چند مشکل سخت رو با هم دارن: چند تب و چند کاربر که هم‌زمان روی یک داده کار می‌کنن، drag که باید فوری حس بشه ولی ترتیبش درست بمونه، و قوانین اشتراک‌گذاری که باید حتی اگه کسی UI رو دور بزنه و مستقیم با API دیتابیس حرف بزنه، برقرار بمونن.",
+    },
+    solution: {
+      en: "I treated the database as the security boundary: Row Level Security policies and role helper functions decide who can read or change what, while the UI only mirrors those rules. On the client, a per-board mutation queue keeps writes in order, optimistic updates make drags feel instant, and a conflict check compares the actual edited fields before overwriting.",
+      fa: "دیتابیس رو به‌عنوان مرز امنیتی در نظر گرفتم: policyهای Row Level Security و توابع کمکی نقش‌ها تصمیم می‌گیرن چه کسی چه چیزی رو ببینه یا تغییر بده، و UI فقط همین قوانین رو منعکس می‌کنه. سمت کلاینت، یک صف mutation برای هر بورد ترتیب نوشتن‌ها رو حفظ می‌کنه، optimistic update باعث می‌شه drag فوری حس بشه، و یک بررسی تعارض قبل از بازنویسی، مقدار واقعی فیلدهای در حال ویرایش رو مقایسه می‌کنه.",
+    },
+    features: [
+      { en: "Drag-and-drop for cards and columns with live sync across tabs and users", fa: "drag-and-drop کارت و ستون با sync لحظه‌ای بین تب‌ها و کاربرها" },
+      { en: "Board sharing by email invite with owner, editor, and viewer roles", fa: "اشتراک‌گذاری بورد با دعوت ایمیلی و نقش‌های مالک، ویرایشگر و فقط‌خواندنی" },
+      { en: "Account deletion with password re-check, ownership transfer, and data export", fa: "حذف حساب با تأیید دوباره‌ی رمز، انتقال مالکیت و خروجی گرفتن از داده‌ها" },
+      { en: "RTL Persian interface with light/dark themes and automated accessibility checks", fa: "رابط فارسی RTL با تم روشن/تیره و بررسی‌های خودکار دسترسی‌پذیری" },
+    ],
+    architecture: [
+      { en: "Row Level Security as the real permission layer, with SECURITY DEFINER helpers pinned to an empty search_path", fa: "Row Level Security به‌عنوان لایه‌ی اصلی دسترسی، با توابع کمکی SECURITY DEFINER که search_path اون‌ها خالی پین شده" },
+      { en: "Fractional positions and a database RPC so a move updates one row instead of renumbering a whole column", fa: "position کسری و یک RPC در دیتابیس تا جابه‌جایی فقط یک سطر رو عوض کنه، نه شماره‌گذاری دوباره‌ی کل ستون" },
+      { en: "Server-side route protection in proxy.ts plus a client AuthGuard for sessions that expire mid-use", fa: "محافظت مسیرها سمت سرور در proxy.ts به‌همراه AuthGuard سمت کلاینت برای نشست‌هایی که وسط کار منقضی می‌شن" },
+      { en: "Realtime events handled by pure, tested functions, with a resync after reconnects because missed events are not replayed", fa: "رویدادهای realtime با توابع pure و تست‌شده مدیریت می‌شن، و بعد از قطع و وصل شدن اتصال resync انجام می‌شه چون رویدادهای از‌دست‌رفته دوباره پخش نمی‌شن" },
+    ],
+    challenges: {
+      en: "The hardest part was making optimistic updates, realtime events, and concurrent edits agree with each other. A realtime event must not overwrite a value that is still in flight, a delete event can arrive twice, and Supabase does not replay events missed during a network drop. I solved it with a write queue, idempotent cache updates, and a refetch whenever the channel reconnects.",
+      fa: "سخت‌ترین بخش این بود که optimistic updateها، رویدادهای realtime و ویرایش‌های هم‌زمان با هم سازگار بمونن. یک رویداد realtime نباید مقداری رو که هنوز در جریانه بازنویسی کنه، یک رویداد حذف ممکنه دو بار برسه، و Supabase رویدادهای از‌دست‌رفته‌ی وسط قطعی شبکه رو دوباره پخش نمی‌کنه. این رو با یک صف نوشتن، به‌روزرسانی‌های idempotent کش و refetch بعد از هر اتصال مجدد کانال حل کردم.",
+    },
+    learned: {
+      en: "I learned to test security where it actually lives. Instead of only checking the UI, I wrote suites that call the database as different users and try to cross ownership and role boundaries — and I learned to be honest about what a test cannot prove, which is why unverifiable checks are reported separately rather than counted as passes.",
+      fa: "یاد گرفتم امنیت رو همون جایی تست کنم که واقعاً هست. به‌جای فقط چک کردن UI، سوئیت‌هایی نوشتم که دیتابیس رو با کاربرهای مختلف صدا می‌زنن و سعی می‌کنن از مرز مالکیت و نقش‌ها رد بشن — و یاد گرفتم درباره‌ی چیزی که یک تست نمی‌تونه ثابت کنه صادق باشم، به همین خاطر بررسی‌های تأییدنشدنی جدا گزارش می‌شن و جزو موفق‌ها شمرده نمی‌شن.",
+    },
+  },
+  {
     id: "stayly",
     name: "Stayly",
     description: {
