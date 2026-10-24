@@ -12,6 +12,8 @@ export interface Project {
   live?: string;
   image?: string;
   featured: boolean;
+  /** Optional short status shown as a badge, e.g. for work-in-progress platforms. */
+  status?: Bilingual;
 
   // Fields used on the project detail page
   overview: Bilingual;
@@ -26,7 +28,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "jobino",
-    name: "Jobino",
+    name: "Jabino",
     description: {
       en: "A full-stack job board with separate candidate and employer roles, covering job posting, search, applications, and resume uploads — with session-based auth and 62 unit tests.",
       fa: "یک جاب‌بورد full-stack با نقش‌های جدا برای کارجو و کارفرما، شامل ثبت آگهی، جست‌وجو، درخواست شغلی و آپلود رزومه — با احراز هویت session-based و ۶۲ تست واحد.",
@@ -37,8 +39,8 @@ export const projects: Project[] = [
     image: "/projects/jobino.jpg",
     featured: true,
     overview: {
-      en: "Jobino is a full-stack job board platform built to handle two distinct user roles — candidates and employers — each with their own permissions, dashboards, and workflows.",
-      fa: "Jobino یک پلتفرم جاب‌بورد full-stack هست که برای دو نقش کاربری جدا — کارجو و کارفرما — ساخته شده، هرکدوم با دسترسی‌ها، داشبورد و فلوی کاری مخصوص خودشون.",
+      en: "Jabino is a full-stack job board platform built to handle two distinct user roles — candidates and employers — each with their own permissions, dashboards, and workflows.",
+      fa: "Jabino یک پلتفرم جاب‌بورد full-stack هست که برای دو نقش کاربری جدا — کارجو و کارفرما — ساخته شده، هرکدوم با دسترسی‌ها، داشبورد و فلوی کاری مخصوص خودشون.",
     },
     problem: {
       en: "Job boards need to serve two very different audiences with conflicting needs on the same platform: employers who need to manage postings and applicants, and candidates who need to discover and apply for jobs — all while keeping each side's data properly isolated.",
@@ -66,6 +68,60 @@ export const projects: Project[] = [
     learned: {
       en: "This project pushed me to think about authorization as a system-wide concern rather than a per-page checkbox, and to write tests that specifically target permission boundaries, not just happy paths.",
       fa: "این پروژه باعث شد به authorization به‌عنوان یک دغدغه‌ی کل‌سیستمی فکر کنم، نه یک چک‌باکس تک‌صفحه‌ای، و تست‌هایی بنویسم که مشخصاً مرزهای دسترسی رو هدف می‌گیرن، نه فقط مسیرهای موفقیت‌آمیز.",
+    },
+  },
+  {
+    id: "finora",
+    name: "Finora",
+    description: {
+      en: "A Persian (RTL) personal finance manager — transactions, accounts, budgets, and reports on a Jalali calendar — with hardened auth, database-backed rate limiting, 900+ tests, and a bearer-token mobile API for the Android app now in development.",
+      fa: "یک اپ مدیریت مالی شخصی فارسی (RTL) — تراکنش، حساب، بودجه و گزارش روی تقویم شمسی — با احراز هویت محکم، rate limiting مبتنی بر دیتابیس، بیش از ۹۰۰ تست و یک API موبایل با bearer token برای اپ اندرویدی که در حال ساخته شدنه.",
+    },
+    tech: ["Next.js", "TypeScript", "Drizzle ORM", "PostgreSQL", "Zod", "Tailwind CSS", "Resend", "Vitest", "Playwright", "Docker"],
+    github: "https://github.com/mina-gharzi/finora",
+    live: "https://finora-psi-sand.vercel.app/",
+    image: "/projects/finora.png",
+    featured: true,
+    status: {
+      en: "Web live · Android in development",
+      fa: "وب فعال · اندروید در حال ساخت",
+    },
+    overview: {
+      en: "Finora is a Persian-first personal finance manager. You record income and expenses, keep cash, bank, and wallet accounts separate, set monthly budgets per category, and review reports and a balance trend — all on a Jalali calendar. The web app is live today; an Android client is being built next, in the same monorepo and against a mobile API that already exists.",
+      fa: "Finora یک اپ مدیریت مالی شخصی فارسی‌محور هست. درآمد و هزینه رو ثبت می‌کنی، حساب‌های نقدی، بانکی و کیف پول رو جدا نگه می‌داری، برای هر دسته بودجه‌ی ماهانه می‌ذاری و گزارش‌ها و روند موجودی رو می‌بینی — همه روی تقویم شمسی. نسخه‌ی وب الان فعاله و نسخه‌ی اندروید بعدش، توی همین مونوریپو و روی یک API موبایل که همین حالا وجود داره ساخته می‌شه.",
+    },
+    problem: {
+      en: "A finance app holds the most personal data a user has, so the unglamorous parts have to be right before any feature matters: money must never lose precision, one user must never see another's records, repeated login attempts must be throttled, and the team must find out when production is quietly broken. On top of that, most finance tools ignore Persian users — RTL layout, Persian digits, and the Jalali calendar.",
+      fa: "یک اپ مالی شخصی‌ترین داده‌ی کاربر رو نگه می‌داره، پس قبل از هر ویژگی، بخش‌های بی‌زرق‌وبرق باید درست باشن: پول هیچ‌وقت نباید دقتش رو از دست بده، کاربر نباید رکوردهای کاربر دیگه رو ببینه، تلاش‌های مکرر ورود باید محدود بشن، و وقتی production بی‌صدا خراب می‌شه باید بفهمیم. علاوه بر این، بیشتر ابزارهای مالی کاربر فارسی‌زبان رو نادیده می‌گیرن — چیدمان RTL، ارقام فارسی و تقویم شمسی.",
+    },
+    solution: {
+      en: "I built the foundations first and the finance features on top. Amounts are integer Toman stored as bigint and parsed strictly (Persian digits accepted, decimals rejected). Every user-owned table carries a non-null owner column written only from the verified session, and every query is scoped by it. Auth actions go through a persistent rate limiter, emailed tokens are single-use and stored only as hashes, and the app ships with a health probe, redacted structured logs, and a production runbook.",
+      fa: "اول پایه‌ها رو ساختم و ویژگی‌های مالی رو روش گذاشتم. مبلغ‌ها تومانِ عدد صحیح هستن که به‌صورت bigint ذخیره می‌شن و سخت‌گیرانه parse می‌شن (ارقام فارسی پذیرفته، اعشار رد می‌شه). هر جدول متعلق به کاربر یک ستون مالک non-null داره که فقط از نشست تأییدشده نوشته می‌شه و هر query با اون محدود می‌شه. عملیات احراز هویت از یک rate limiter پایدار رد می‌شن، توکن‌های ایمیلی یک‌بارمصرف هستن و فقط به‌صورت hash ذخیره می‌شن، و اپ با health probe، لاگ ساختاریافته‌ی redact‌شده و runbook استقرار تحویل داده می‌شه.",
+    },
+    features: [
+      { en: "Transactions with search, filters, edit and delete, plus CSV export that guards against spreadsheet formula injection", fa: "تراکنش‌ها با جست‌وجو، فیلتر، ویرایش و حذف، به‌همراه خروجی CSV که جلوی formula injection در اسپردشیت رو می‌گیره" },
+      { en: "Cash, bank, and wallet accounts with balances derived from opening balance and transactions", fa: "حساب‌های نقدی، بانکی و کیف پول با موجودی محاسبه‌شده از موجودی اولیه و تراکنش‌ها" },
+      { en: "Monthly per-category budgets with progress that flags approaching and exceeded limits in text, not just colour", fa: "بودجه‌ی ماهانه‌ی هر دسته با نمایش پیشرفت که نزدیک‌شدن و عبور از سقف رو با متن اعلام می‌کنه، نه فقط با رنگ" },
+      { en: "Dashboard and reports on Jalali months, including an account balance trend", fa: "داشبورد و گزارش‌ها روی ماه‌های شمسی، شامل روند موجودی حساب" },
+      { en: "Email verification, password recovery, and email change with single-use tokens", fa: "تأیید ایمیل، بازیابی گذرواژه و تغییر ایمیل با توکن‌های یک‌بارمصرف" },
+      { en: "Persian RTL interface with light and dark themes", fa: "رابط فارسی RTL با تم روشن و تیره" },
+    ],
+    architecture: [
+      { en: "pnpm monorepo: apps/web plus a shared package that already holds the mobile API types and Jalali date helpers", fa: "مونوریپوی pnpm: apps/web به‌همراه یک پکیج مشترک که همین حالا تایپ‌های API موبایل و توابع تاریخ شمسی رو نگه می‌داره" },
+      { en: "Mobile REST endpoints (login and overview) use bearer tokens verified with the same signature and session-invalidation policy as cookie sessions", fa: "endpointهای REST موبایل (ورود و نمای کلی) از bearer token استفاده می‌کنن که با همون سیاست امضا و ابطال نشست کوکی‌ها verify می‌شه" },
+      { en: "The auth proxy is only an optimistic redirect; the real authorization boundary is re-verifying the session in the data access layer on every read and action", fa: "proxy فقط یک redirect خوش‌بینانه‌ست؛ مرز واقعی authorization، verify دوباره‌ی نشست در data access layer در هر خواندن و هر action هست" },
+      { en: "Password reset and verification tokens are stored as SHA-256 hashes and consumed by a conditional UPDATE, so concurrent use of one link cannot succeed twice", fa: "توکن‌های بازیابی و تأیید به‌صورت hash با SHA-256 ذخیره می‌شن و با یک UPDATE شرطی مصرف می‌شن، پس استفاده‌ی هم‌زمان از یک لینک دو بار موفق نمی‌شه" },
+      { en: "Database-backed fixed-window rate limiter using atomic upserts on hashed keys, failing closed if the store is down", fa: "rate limiter مبتنی بر دیتابیس با پنجره‌ی ثابت، upsert اتمیک روی کلیدهای hash‌شده و رفتار fail-closed وقتی ذخیره‌گاه در دسترس نیست" },
+      { en: "A composite index on owner, date, and creation time serves the history page's filter and sort in a single index walk", fa: "یک ایندکس ترکیبی روی مالک، تاریخ و زمان ایجاد، فیلتر و مرتب‌سازی صفحه‌ی تاریخچه رو با یک پیمایش ایندکس انجام می‌ده" },
+      { en: "GitHub Actions CI runs typecheck, lint, unit tests, and a Playwright suite against a throwaway PostgreSQL service", fa: "CI در GitHub Actions تایپ‌چک، lint، تست واحد و سوئیت Playwright رو روی یک PostgreSQL موقت اجرا می‌کنه" },
+    ],
+    challenges: {
+      en: "A rate limiter that fails closed is the safe choice, but it creates a nasty ambiguity: when the database is down, users see the same \"too many attempts\" message as during a real attack. I solved it by logging a distinct event with the failing operation and the driver's error code, so an outage can be told apart from abuse. I also learned that mocked unit tests cannot catch a deployment whose migrations were never applied — which is why the end-to-end suite runs against a real database in CI.",
+      fa: "rate limiter با رفتار fail-closed انتخاب امنیتیه، ولی یک ابهام بد درست می‌کنه: وقتی دیتابیس از کار افتاده، کاربر همون پیام «تلاش بیش از حد» رو می‌بینه که در حمله‌ی واقعی می‌بینه. این رو با لاگ کردن یک event جدا شامل عملیات شکست‌خورده و کد خطای درایور حل کردم تا قطعی از سوءاستفاده قابل تشخیص باشه. همچنین فهمیدم تست‌های واحد با mock نمی‌تونن استقراری رو که migrationهاش هیچ‌وقت اجرا نشده بگیرن — برای همین سوئیت end-to-end در CI روی دیتابیس واقعی اجرا می‌شه.",
+    },
+    learned: {
+      en: "I learned to treat security and operations as features with their own tests and documentation, not cleanup work for later. Putting the shared types and the mobile API in place before starting the Android app means the client can be built against a tested contract instead of guessing at the backend.",
+      fa: "یاد گرفتم امنیت و عملیات رو مثل ویژگی‌های اصلی، با تست و مستندات خودشون ببینم، نه کاری که بعداً جمعش می‌کنم. آماده کردن تایپ‌های مشترک و API موبایل قبل از شروع اپ اندروید یعنی کلاینت روی یک قرارداد تست‌شده ساخته می‌شه، نه با حدس زدن رفتار بک‌اند.",
     },
   },
   {
@@ -164,7 +220,7 @@ export const projects: Project[] = [
       en: "An e-commerce admin dashboard with a centralized five-level RBAC system, shared across route protection, navigation, and sensitive actions.",
       fa: "یک داشبورد مدیریت فروشگاهی با سیستم RBAC پنج‌سطحی متمرکز، مشترک بین محافظت مسیرها، ناوبری و عملیات حساس.",
     },
-    tech: ["React", "TypeScript", "Zustand", "React Router", "TanStack Table", "Recharts", "Playwright"],
+    tech: ["React", "TypeScript", "Zustand", "React Router", "TanStack Table", "Recharts", "Vitest"],
     github: "https://github.com/mina-gharzi/admin-dashboard",
     live: "https://admindashboardstate.netlify.app/",
     image: "/projects/admin.png",

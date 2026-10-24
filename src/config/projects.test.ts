@@ -39,4 +39,12 @@ describe("projects config", () => {
       expect(text.fa.trim()).not.toBe("");
     }
   });
+
+  it.each(projects.filter((p) => p.status !== undefined).map((p) => [p.id, p] as const))(
+    "%s has a bilingual status badge",
+    (_id, project) => {
+      expect(project.status?.en.trim()).toBeTruthy();
+      expect(project.status?.fa.trim()).toBeTruthy();
+    },
+  );
 });

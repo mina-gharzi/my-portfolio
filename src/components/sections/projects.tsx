@@ -60,6 +60,12 @@ export function Projects() {
                   {t.featured}
                 </span>
 
+                {featuredProject.status && (
+                  <Badge className="self-start mb-3 border-accent/40 text-accent">
+                    {featuredProject.status[language]}
+                  </Badge>
+                )}
+
                 <Link
                   href={`/projects/${featuredProject.id}`}
                   className="block"
@@ -134,6 +140,12 @@ export function Projects() {
                   </div>
 
                   <div className="p-5 flex flex-col flex-1">
+                    {project.status && (
+                      <Badge className="self-start mb-3 text-[11px] px-2 py-0.5 border-accent/40 text-accent">
+                        {project.status[language]}
+                      </Badge>
+                    )}
+
                     <Link href={`/projects/${project.id}`} className="block">
                       <h3 className="text-base font-bold text-text mb-2 hover:text-accent transition-colors">
                         {project.name}

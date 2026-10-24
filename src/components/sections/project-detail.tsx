@@ -59,6 +59,12 @@ export function ProjectDetail({ project }: { project: Project }) {
             {project.name}
           </h1>
 
+          {project.status && (
+            <Badge className="mb-4 border-accent/40 text-accent">
+              {project.status[language]}
+            </Badge>
+          )}
+
           <div className="flex flex-wrap gap-2 mb-6">
             {project.tech.map((tech) => (
               <Badge key={tech}>{tech}</Badge>
