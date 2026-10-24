@@ -27,50 +27,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "jobino",
-    name: "Jabino",
-    description: {
-      en: "A full-stack job board with separate candidate and employer roles, covering job posting, search, applications, and resume uploads — with session-based auth and 62 unit tests.",
-      fa: "یک جاب‌بورد full-stack با نقش‌های جدا برای کارجو و کارفرما، شامل ثبت آگهی، جست‌وجو، درخواست شغلی و آپلود رزومه — با احراز هویت session-based و ۶۲ تست واحد.",
-    },
-    tech: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Better Auth", "Zod", "Vitest", "Playwright"],
-    github: "https://github.com/mina-gharzi/jobboard",
-    live: "https://jobboard-6p9y.vercel.app/",
-    image: "/projects/jobino.jpg",
-    featured: true,
-    overview: {
-      en: "Jabino is a full-stack job board platform built to handle two distinct user roles — candidates and employers — each with their own permissions, dashboards, and workflows.",
-      fa: "Jabino یک پلتفرم جاب‌بورد full-stack هست که برای دو نقش کاربری جدا — کارجو و کارفرما — ساخته شده، هرکدوم با دسترسی‌ها، داشبورد و فلوی کاری مخصوص خودشون.",
-    },
-    problem: {
-      en: "Job boards need to serve two very different audiences with conflicting needs on the same platform: employers who need to manage postings and applicants, and candidates who need to discover and apply for jobs — all while keeping each side's data properly isolated.",
-      fa: "جاب‌بوردها باید دو مخاطب کاملاً متفاوت با نیازهای متضاد رو روی یک پلتفرم پوشش بدن: کارفرماهایی که باید آگهی و متقاضی‌ها رو مدیریت کنن، و کارجوهایی که باید شغل پیدا کنن و درخواست بدن — و در عین حال داده‌ی هر طرف باید کاملاً جدا و امن بمونه.",
-    },
-    solution: {
-      en: "I designed a role-based authorization system with Better Auth, where every server action checks both the user's role and resource ownership before executing. The data model in Prisma enforces relational integrity, and search includes Persian text normalization so queries match regardless of character variations.",
-      fa: "یک سیستم authorization نقش‌محور با Better Auth طراحی کردم که هر server action قبل از اجرا هم نقش کاربر هم مالکیت منبع رو چک می‌کنه. مدل داده در Prisma یکپارچگی رابطه‌ای رو تضمین می‌کنه، و جست‌وجو شامل نرمال‌سازی متن فارسی هست تا صرف‌نظر از تفاوت کاراکترها، نتیجه‌ی درست برگرده.",
-    },
-    features: [
-      { en: "Separate candidate and employer dashboards", fa: "داشبورد جدا برای کارجو و کارفرما" },
-      { en: "Job posting, search, and filtering", fa: "ثبت آگهی، جست‌وجو و فیلتر کردن" },
-      { en: "Secure resume upload pipeline via Vercel Blob", fa: "پایپ‌لاین امن آپلود رزومه با Vercel Blob" },
-      { en: "Persian text normalization in search", fa: "نرمال‌سازی متن فارسی در جست‌وجو" },
-    ],
-    architecture: [
-      { en: "Next.js Server Actions instead of a separate REST API layer", fa: "استفاده از Next.js Server Actions به‌جای یک لایه‌ی REST API جدا" },
-      { en: "Prisma + PostgreSQL with relational constraints enforced at the database level", fa: "Prisma و PostgreSQL با محدودیت‌های رابطه‌ای اعمال‌شده در سطح دیتابیس" },
-      { en: "Ownership checks on every mutation to prevent cross-user data access", fa: "بررسی مالکیت روی هر عملیات تغییر داده برای جلوگیری از دسترسی بین کاربران" },
-    ],
-    challenges: {
-      en: "Getting authorization right across both roles was the hardest part — a single missed ownership check could expose one employer's applicants to another. I addressed this by centralizing the checks in shared helper functions rather than repeating logic per route.",
-      fa: "درست کردن authorization بین دو نقش سخت‌ترین بخش کار بود — یک بررسی مالکیت جا افتاده می‌تونست متقاضی‌های یک کارفرما رو به کارفرمای دیگه نشون بده. این مشکل رو با متمرکز کردن این بررسی‌ها در توابع کمکی مشترک (به‌جای تکرار منطق در هر route) حل کردم.",
-    },
-    learned: {
-      en: "This project pushed me to think about authorization as a system-wide concern rather than a per-page checkbox, and to write tests that specifically target permission boundaries, not just happy paths.",
-      fa: "این پروژه باعث شد به authorization به‌عنوان یک دغدغه‌ی کل‌سیستمی فکر کنم، نه یک چک‌باکس تک‌صفحه‌ای، و تست‌هایی بنویسم که مشخصاً مرزهای دسترسی رو هدف می‌گیرن، نه فقط مسیرهای موفقیت‌آمیز.",
-    },
-  },
-  {
     id: "finora",
     name: "Finora",
     description: {
@@ -122,6 +78,50 @@ export const projects: Project[] = [
     learned: {
       en: "I learned to treat security and operations as features with their own tests and documentation, not cleanup work for later. Putting the shared types and the mobile API in place before starting the Android app means the client can be built against a tested contract instead of guessing at the backend.",
       fa: "یاد گرفتم امنیت و عملیات رو مثل ویژگی‌های اصلی، با تست و مستندات خودشون ببینم، نه کاری که بعداً جمعش می‌کنم. آماده کردن تایپ‌های مشترک و API موبایل قبل از شروع اپ اندروید یعنی کلاینت روی یک قرارداد تست‌شده ساخته می‌شه، نه با حدس زدن رفتار بک‌اند.",
+    },
+  },
+  {
+    id: "jobino",
+    name: "Jabino",
+    description: {
+      en: "A full-stack job board with separate candidate and employer roles, covering job posting, search, applications, and resume uploads — with session-based auth and 62 unit tests.",
+      fa: "یک جاب‌بورد full-stack با نقش‌های جدا برای کارجو و کارفرما، شامل ثبت آگهی، جست‌وجو، درخواست شغلی و آپلود رزومه — با احراز هویت session-based و ۶۲ تست واحد.",
+    },
+    tech: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Better Auth", "Zod", "Vitest", "Playwright"],
+    github: "https://github.com/mina-gharzi/jobboard",
+    live: "https://jobboard-6p9y.vercel.app/",
+    image: "/projects/jobino.jpg",
+    featured: true,
+    overview: {
+      en: "Jabino is a full-stack job board platform built to handle two distinct user roles — candidates and employers — each with their own permissions, dashboards, and workflows.",
+      fa: "Jabino یک پلتفرم جاب‌بورد full-stack هست که برای دو نقش کاربری جدا — کارجو و کارفرما — ساخته شده، هرکدوم با دسترسی‌ها، داشبورد و فلوی کاری مخصوص خودشون.",
+    },
+    problem: {
+      en: "Job boards need to serve two very different audiences with conflicting needs on the same platform: employers who need to manage postings and applicants, and candidates who need to discover and apply for jobs — all while keeping each side's data properly isolated.",
+      fa: "جاب‌بوردها باید دو مخاطب کاملاً متفاوت با نیازهای متضاد رو روی یک پلتفرم پوشش بدن: کارفرماهایی که باید آگهی و متقاضی‌ها رو مدیریت کنن، و کارجوهایی که باید شغل پیدا کنن و درخواست بدن — و در عین حال داده‌ی هر طرف باید کاملاً جدا و امن بمونه.",
+    },
+    solution: {
+      en: "I designed a role-based authorization system with Better Auth, where every server action checks both the user's role and resource ownership before executing. The data model in Prisma enforces relational integrity, and search includes Persian text normalization so queries match regardless of character variations.",
+      fa: "یک سیستم authorization نقش‌محور با Better Auth طراحی کردم که هر server action قبل از اجرا هم نقش کاربر هم مالکیت منبع رو چک می‌کنه. مدل داده در Prisma یکپارچگی رابطه‌ای رو تضمین می‌کنه، و جست‌وجو شامل نرمال‌سازی متن فارسی هست تا صرف‌نظر از تفاوت کاراکترها، نتیجه‌ی درست برگرده.",
+    },
+    features: [
+      { en: "Separate candidate and employer dashboards", fa: "داشبورد جدا برای کارجو و کارفرما" },
+      { en: "Job posting, search, and filtering", fa: "ثبت آگهی، جست‌وجو و فیلتر کردن" },
+      { en: "Secure resume upload pipeline via Vercel Blob", fa: "پایپ‌لاین امن آپلود رزومه با Vercel Blob" },
+      { en: "Persian text normalization in search", fa: "نرمال‌سازی متن فارسی در جست‌وجو" },
+    ],
+    architecture: [
+      { en: "Next.js Server Actions instead of a separate REST API layer", fa: "استفاده از Next.js Server Actions به‌جای یک لایه‌ی REST API جدا" },
+      { en: "Prisma + PostgreSQL with relational constraints enforced at the database level", fa: "Prisma و PostgreSQL با محدودیت‌های رابطه‌ای اعمال‌شده در سطح دیتابیس" },
+      { en: "Ownership checks on every mutation to prevent cross-user data access", fa: "بررسی مالکیت روی هر عملیات تغییر داده برای جلوگیری از دسترسی بین کاربران" },
+    ],
+    challenges: {
+      en: "Getting authorization right across both roles was the hardest part — a single missed ownership check could expose one employer's applicants to another. I addressed this by centralizing the checks in shared helper functions rather than repeating logic per route.",
+      fa: "درست کردن authorization بین دو نقش سخت‌ترین بخش کار بود — یک بررسی مالکیت جا افتاده می‌تونست متقاضی‌های یک کارفرما رو به کارفرمای دیگه نشون بده. این مشکل رو با متمرکز کردن این بررسی‌ها در توابع کمکی مشترک (به‌جای تکرار منطق در هر route) حل کردم.",
+    },
+    learned: {
+      en: "This project pushed me to think about authorization as a system-wide concern rather than a per-page checkbox, and to write tests that specifically target permission boundaries, not just happy paths.",
+      fa: "این پروژه باعث شد به authorization به‌عنوان یک دغدغه‌ی کل‌سیستمی فکر کنم، نه یک چک‌باکس تک‌صفحه‌ای، و تست‌هایی بنویسم که مشخصاً مرزهای دسترسی رو هدف می‌گیرن، نه فقط مسیرهای موفقیت‌آمیز.",
     },
   },
   {
