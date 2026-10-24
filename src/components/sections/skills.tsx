@@ -31,7 +31,15 @@ const categories = [
   },
   {
     title: { en: "Backend & Database", fa: "بک‌اند و دیتابیس" },
-    items: ["Next.js Server Actions", "Prisma ORM", "PostgreSQL", "Better Auth"],
+    items: [
+      "Next.js Server Actions",
+      "Next.js Route Handlers",
+      "Prisma ORM",
+      "Drizzle ORM",
+      "PostgreSQL",
+      "Better Auth",
+      "JWT Sessions",
+    ],
   },
   {
     title: { en: "State & Data", fa: "مدیریت State و داده" },
@@ -43,7 +51,16 @@ const categories = [
   },
   {
     title: { en: "Testing & Tools", fa: "تست و ابزارها" },
-    items: ["Playwright", "Vitest", "Git", "GitHub", "ESLint"],
+    items: [
+      "Playwright",
+      "Vitest",
+      "Git",
+      "GitHub",
+      "GitHub Actions",
+      "Docker",
+      "pnpm",
+      "ESLint",
+    ],
   },
 ];
 
